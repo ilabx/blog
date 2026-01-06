@@ -18,7 +18,7 @@ order: 4
 
 ## 二、主要活跃社区
 
-1.Github: [https://github.com/zigfan](https://github.com/zigfan)
+1.Github: [https://github.com/geekdex](https://github.com/geekdex)
 
 2.哔哩哔哩: [https://space.bilibili.com/172353353](https://space.bilibili.com/172353353)
 

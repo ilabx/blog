@@ -14,6 +14,10 @@ platforms:
     type: Telegram
     icon: "fab fa-telegram"
     link: "https://t.me/share/url?url=URL&text=TITLE"
+  -
+    type: Weibo
+    icon: "fab fa-weibo"
+    link: "https://service.weibo.com/share/share.php?title=TITLE&url=URL"
 
   # Uncomment below if you need to.
   # -
