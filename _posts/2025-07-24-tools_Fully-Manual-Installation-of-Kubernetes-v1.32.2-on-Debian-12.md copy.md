@@ -14,43 +14,43 @@ Kubernetes 集群由 Master 节点（控制节点）和 Node 节点（工作节�
 
 #### 1.1.1 Master节点
 
-1. **etcd**  
-   - 分布式键值存储数据库，保存集群的所有状态和配置数据（如 Pod、Service、Namespace 等）。  
+1. **etcd**
+   - 分布式键值存储数据库，保存集群的所有状态和配置数据（如 Pod、Service、Namespace 等）。
    - 是 Kubernetes 的“唯一真实数据源”（Single Source of Truth）。
 
-2. **API Server（kube-apiserver）**  
-   - 集群的入口，提供 REST API，处理所有操作请求（如创建、更新、删除资源）。  
+2. **API Server（kube-apiserver）**
+   - 集群的入口，提供 REST API，处理所有操作请求（如创建、更新、删除资源）。
    - 负责与其他组件通信（如 kubelet、kube-scheduler 等）。
 
-3. **Scheduler（kube-scheduler）**  
+3. **Scheduler（kube-scheduler）**
    - 监听未调度的 Pod，根据资源需求、节点负载等因素，将 Pod 分配到合适的 Node 上运行。
 
-4. **Controller Manager（kube-controller-manager）**  
-   - 运行一系列控制器，确保集群状态与期望一致。  
-   - 核心控制器包括：  
-     - Node Controller（监控节点状态）  
-     - Deployment Controller（管理副本数）  
-     - Service Controller（管理 Service 与 Endpoint）  
+4. **Controller Manager（kube-controller-manager）**
+   - 运行一系列控制器，确保集群状态与期望一致。
+   - 核心控制器包括：
+     - Node Controller（监控节点状态）
+     - Deployment Controller（管理副本数）
+     - Service Controller（管理 Service 与 Endpoint）
      - 其他控制器（如 ReplicaSet、Namespace 控制器等）。
 
-5. **（可选）Cloud Controller Manager**  
-   - 当集群运行在公有云环境时，负责与云平台交互（如负载均衡、存储卷、节点管理）。  
+5. **（可选）Cloud Controller Manager**
+   - 当集群运行在公有云环境时，负责与云平台交互（如负载均衡、存储卷、节点管理）。
    - 解耦 Kubernetes 与特定云厂商的代码。
 
 #### 1.1.2 Node 节点组件
 
-1. **kubelet**  
-   - 运行在每个 Node 上的“节点代理”，负责：  
-     - 与 Master 通信，接收 Pod 定义（通过 API Server）。  
-     - 管理 Pod 生命周期（启动、停止、监控容器）。  
+1. **kubelet**
+   - 运行在每个 Node 上的“节点代理”，负责：
+     - 与 Master 通信，接收 Pod 定义（通过 API Server）。
+     - 管理 Pod 生命周期（启动、停止、监控容器）。
      - 上报节点状态（如资源使用、Pod 状态）到 Master。
 
-2. **kube-proxy**  
-   - 维护节点上的网络规则，实现 Service 的抽象（如负载均衡、服务发现）。  
+2. **kube-proxy**
+   - 维护节点上的网络规则，实现 Service 的抽象（如负载均衡、服务发现）。
    - 通过 iptables/IPVS 或用户空间代理转发流量到 Pod。
 
-3. **容器运行时（Container Runtime）**  
-   - 负责运行容器的底层软件，如 Docker、containerd、CRI-O。  
+3. **容器运行时（Container Runtime）**
+   - 负责运行容器的底层软件，如 Docker、containerd、CRI-O。
    - 与 Kubernetes 通过 CRI（Container Runtime Interface）交互。
 
 ### 1.2 集群主机规划
@@ -567,7 +567,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=www 
 创建证书信息
 
 ```shell
-cat > /etc/kubernetes/pki/admin-csr.json << EOF 
+cat > /etc/kubernetes/pki/admin-csr.json << EOF
 {
   "CN": "admin",
   "key": {
@@ -746,8 +746,8 @@ etcd-server-101                  RUNNING   pid 85297, uptime 0:04:38
 
 ```shell
 root@debian:/opt/etcd# netstat -luntp | grep etcd
-tcp        0      0 192.168.122.101:2379      0.0.0.0:*               LISTEN      85298/./etcd        
-tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      85298/./etcd        
+tcp        0      0 192.168.122.101:2379      0.0.0.0:*               LISTEN      85298/./etcd
+tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      85298/./etcd
 tcp        0      0 192.168.122.101:2380      0.0.0.0:*               LISTEN      85298/./etcd
 ```
 
@@ -1086,7 +1086,7 @@ if [ -n "$CHK_PORT" ]; then
     fi
 else
     echo "Check Port Cant Be Empty!"
-    exit 1 
+    exit 1
 fi
 ```
 
@@ -1416,8 +1416,8 @@ kubectl create clusterrolebinding system:anonymous --clusterrole=cluster-admin -
 root@k8s-101:~# kubectl get cs
 Warning: v1 ComponentStatus is deprecated in v1.19+
 NAME                 STATUS    MESSAGE   ERROR
-scheduler            Healthy   ok        
-controller-manager   Healthy   ok        
+scheduler            Healthy   ok
+controller-manager   Healthy   ok
 etcd-0               Healthy   ok
 ```
 
@@ -1465,7 +1465,7 @@ mv kubelet-bootstrap.conf  /etc/kubernetes/
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
 address: 0.0.0.0
-port: 10250 
+port: 10250
 readOnlyPort: 10255
 authentication:
   anonymous:
@@ -1619,7 +1619,7 @@ apiVersion: kubeproxy.config.k8s.io/v1alpha1
 bindAddress: 0.0.0.0
 clientConnection:
   kubeconfig: /etc/kubernetes/kube-proxy.kubeconfig
-clusterCIDR: 10.244.0.0/16 
+clusterCIDR: 10.244.0.0/16
 kind: KubeProxyConfiguration
 metricsBindAddress: 0.0.0.0:10249
 mode: "ipvs"
@@ -2012,7 +2012,7 @@ kube-system   traefik      NodePort    10.96.71.38   <none>        80:58180/TCP,
 
 ### 14.2 配置负载均衡
 
-我们在`k8s-101`、`k8s-102`节点上分别创建了nginx服务，现在我们将流量转发到这2个工作节点上，假设我们的业务服务器是`aoco.tech`，在`nginx`服务器添加以下配置
+我们在`k8s-101`、`k8s-102`节点上分别创建了nginx服务，现在我们将流量转发到这2个工作节点上，假设我们的业务服务器是`algs.tech`，在`nginx`服务器添加以下配置
 
 ```ini
 upstream traefik_dashboard {
@@ -2021,7 +2021,7 @@ upstream traefik_dashboard {
 }
 
 server {
-    server_name traefik.aoco.tech;
+    server_name traefik.algs.tech;
 
     location / {
         proxy_pass http://traefik_dashboard;
@@ -2037,7 +2037,7 @@ upstream traefik_http {
 }
 
 server {
-    server_name *.aoco.tech;
+    server_name *.algs.tech;
     listen 80;
 
     location / {
@@ -2053,14 +2053,14 @@ upstream traefik_https {
 }
 
 server {
-    server_name *.aoco.tech;
+    server_name *.algs.tech;
     listen 443 ssl;
 
     # ssl证书
-    ssl_certificate /etc/certs/ssl/aoco.tech/fullchain.pem;
-    ssl_certificate_key /etc/certs/ssl/aoco.tech/key.pem;
+    ssl_certificate /etc/certs/ssl/algs.tech/fullchain.pem;
+    ssl_certificate_key /etc/certs/ssl/algs.tech/key.pem;
     ssl_session_timeout     5m;
-    
+
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
     ssl_session_cache shared:SSL:10m;
@@ -2074,7 +2074,7 @@ server {
 }
 ```
 
-在以上配置中，我们把`traefik.aoco.tech`的请求转发到traefik的控制面板。同时，我们把`*.aoco.tech`的所有80端口和443端口的流量转发到集群对应的traefik服务，由traefik来调度，后续发布服务我们只需要配置好 `ingress` 资源即可。
+在以上配置中，我们把`traefik.algs.tech`的请求转发到traefik的控制面板。同时，我们把`*.algs.tech`的所有80端口和443端口的流量转发到集群对应的traefik服务，由traefik来调度，后续发布服务我们只需要配置好 `ingress` 资源即可。
 
 至此，集群的核心组件和核心插件已经全部安装完毕。
 
@@ -2158,7 +2158,7 @@ metadata:
   name: whoami-ingress
 spec:
   rules:
-  - host: nginx.aoco.tech
+  - host: nginx.algs.tech
     http:
       paths:
       - path: /
@@ -2182,4 +2182,4 @@ kubectl apply -f whoami.yml \
 
 执行以上命令之后，k8s将会拉取 nginx 的镜像，并按我们指定的配置去启动服务。
 
-启动完成之后，我们在自己的桌面操作系统的电脑上将`nginx.aoco.tech`域名解析到在前面通过 `keepalived` 创建的虚拟IP `192.168.122.100`，再使用浏览器访问域名，就顺利访问到了nginx的首页了。
+启动完成之后，我们在自己的桌面操作系统的电脑上将`nginx.algs.tech`域名解析到在前面通过 `keepalived` 创建的虚拟IP `192.168.122.100`，再使用浏览器访问域名，就顺利访问到了nginx的首页了。
