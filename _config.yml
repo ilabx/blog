@@ -19,7 +19,7 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Aoco Tech                          # the main title
+title: 极客开发者-博客                          # the main title
 
 tagline: 在探索未知与梦想的道路上，让我们拥有共同的称呼 -- 开发者   # it will display as the sub-title
 
