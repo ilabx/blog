@@ -244,4 +244,4 @@ pkill -SIGQUIT load_balancer && RUST_LOG=INFO cargo run --release -- -c conf.yam
 
 在后续，我也会分享一些关于 Pingora 以及新兴热门技术的更多内容，欢迎继续关注！
 
-> 本文完整示例代码：<https://github.com/phyuany/simple-pingora-reverse-proxy>
+> 本文完整示例代码：<https://github.com/geekdex/simple-pingora-reverse-proxy>
